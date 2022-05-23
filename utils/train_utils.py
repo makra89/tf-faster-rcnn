@@ -1,6 +1,7 @@
 import tensorflow as tf
 import math
 from utils import bbox_utils
+import copy
 
 RPN = {
     "vgg16": {
@@ -39,7 +40,7 @@ def get_hyper_params(backbone, **kwargs):
             hyper_params[key] = value
     #
     hyper_params["anchor_count"] = len(hyper_params["anchor_ratios"]) * len(hyper_params["anchor_scales"])
-    return hyper_params
+    return copy.deepcopy(hyper_params)
 
 def get_step_size(total_items, batch_size):
     """Get step size for given total item size and batch size.
